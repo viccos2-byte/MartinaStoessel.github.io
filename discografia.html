@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Discografía de TINI — TINI Wiki</title>
+        <link rel="stylesheet" href="estilo.css" />
+        <style>
+            .album-card {
+                display: grid;
+                grid-template-columns: 200px 1fr;
+                gap: 24px;
+                background: var(--bg-card);
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                padding: 24px;
+                margin-bottom: 24px;
+                transition: all 0.4s;
+            }
+            .album-card:hover {
+                border-color: var(--accent);
+                transform: translateX(8px);
+                box-shadow: -8px 0 30px rgba(139, 92, 246, 0.1);
+            }
+            .album-cover {
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+                border-radius: 12px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            }
+            .album-info h3 {
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-bottom: 4px;
+            }
+            .album-info .year-badge {
+                display: inline-block;
+                background: var(--accent);
+                color: #fff;
+                padding: 2px 12px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                margin-bottom: 8px;
+            }
+            .album-info p {
+                color: var(--text-dim);
+                margin-bottom: 12px;
+            }
+            .album-info .tracks {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            .album-info .tracks span {
+                background: rgba(139, 92, 246, 0.1);
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: 0.85rem;
+                color: var(--text);
+            }
+            @media (max-width: 600px) {
+                .album-card {
+                    grid-template-columns: 1fr;
+                    text-align: center;
+                }
+                .album-cover {
+                    margin: 0 auto;
+                }
+                .album-info .tracks {
+                    justify-content: center;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page-loader" id="pageLoader">
+            <div class="loader-spinner"></div>
+            <div class="loader-text">Cargando...</div>
+        </div>
+
+        <div id="mouseGlow"></div>
+
+        <nav class="navbar" id="topBar">
+            <a href="index.html">Portada</a>
+            <a href="biografia.html">Biografía</a>
+            <a href="discografia.html" class="active">Discografía</a>
+            <span class="nav-icon">🎵</span>
+            <a href="canciones.html">Canciones</a>
+            <a href="colaboraciones.html">Colaboraciones</a>
+            <a href="datos.html">Datos Curiosos</a>
+        </nav>
+
+        <div class="floating-notes" id="floatingNotes"></div>
+
+        <section class="wiki-hero hero">
+            <div class="hero-img-wrap">
+                <img src="img1.jpeg" alt="TINI" />
+            </div>
+            <div class="hero-text-container">
+                <span class="hero-badge">✦ Discografía ✦</span>
+                <h1>La música de <em>TINI</em></h1>
+                <p>
+                    Todos los álbumes de Martina Stoessel — una carrera llena de
+                    éxitos que han marcado a toda una generación.
+                </p>
+                <div class="hero-tags">
+                    <span>💿 5 Álbumes de Estudio</span>
+                    <span>🎵 +80 Canciones</span>
+                    <span>🏆 Múltiples Discos de Platino</span>
+                </div>
+            </div>
+        </section>
+
+        <main style="max-width: 1200px; margin: 0 auto; padding: 0 32px 80px">
+            <div class="wiki-content fade-in">
+                <h2>&Aacute;lbumes de Estudio</h2>
+                <p>La evoluci&oacute;n musical de TINI a trav&eacute;s de sus discos</p>
+
+            <!-- TINI (2016) -->
+            <div class="album-card fade-left">
+                <img
+                    class="album-cover"
+                    src="https://upload.wikimedia.org/wikipedia/commons/5/55/TINI_2021_01.png"
+                    alt="TINI 2016"
+                    loading="lazy"
+                />
+                <div class="album-info">
+                    <h3>TINI (Martina Stoessel)</h3>
+                    <span class="year-badge">2016</span>
+                    <p>
+                        <strong>Discográfica:</strong> Sony Music Latin<br />
+                        <strong>Idiomas:</strong> Español, inglés<br />
+                        <strong>Certificaciones:</strong> Oro en Argentina,
+                        Platino en varios países
+                    </p>
+                    <p>
+                        Su álbum debut como solista, lanzado después del éxito
+                        de Violetta. Incluye canciones que mezclan pop, dance y
+                        baladas. El disco marcó el inicio de su carrera
+                        independiente y presentó al mundo a la TINI artista.
+                    </p>
+                    <div class="tracks">
+                        <span>Siempre Brillarás</span>
+                        <span>Great Escape</span>
+                        <span>Got Me Started</span>
+                        <span>Yo Te Amo</span>
+                        <span>Ya No Hay Nadie</span>
+                        <span>Te Quiero Más</span>
+                        <span>Losing the Love</span>
+                        <span>Finders Keepers</span>
+                        <span>Mi Amor</span>
+                        <span>Si Tú Te Vas</span>
+                        <span>Corazón</span>
+                        <span>Sueños</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiero Volver (2018) -->
+            <div class="album-card fade-right">
+                <img
+                    class="album-cover"
+                    src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Tini_2018.png"
+                    alt="Quiero Volver"
+                    loading="lazy"
+                />
+                <div class="album-info">
+                    <h3>Quiero Volver</h3>
+                    <span class="year-badge">2018</span>
+                    <p>
+                        <strong>Discográfica:</strong> Sony Music Latin<br />
+                        <strong>Idiomas:</strong> Español, inglés, portugués<br />
+                        <strong>Colaboraciones:</strong> Sebastián Yatra, Nacho,
+                        Karol G, Calibre 50
+                    </p>
+                    <p>
+                        Su segundo álbum marcó un giro hacia el pop latino con
+                        influencias urbanas. Con un sonido más maduro, TINI
+                        exploró nuevos géneros y demostró su versatilidad
+                        artística. El sencillo "Quiero Volver" con Sebastián
+                        Yatra fue un éxito internacional.
+                    </p>
+                    <div class="tracks">
+                        <span>Quiero Volver (ft. Sebastián Yatra)</span>
+                        <span>Princesa (ft. Karol G)</span>
+                        <span>Por Qué Te Vas</span>
+                        <span>Oye (ft. Sebastián Yatra)</span>
+                        <span>22 (ft. Greeicy)</span>
+                        <span>Love Is Love</span>
+                        <span>Te Pedí</span>
+                        <span>Flaco</span>
+                        <span>Ya No Me Duele</span>
+                        <span>No Soy Ahí</span>
+                        <span>Antes de Ti</span>
+                        <span>Recuerdo</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TINI TINI TINI (2020) -->
+            <div class="album-card fade-left">
+                <img
+                    class="album-cover"
+                    src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Tini_2020.jpg"
+                    alt="TINI TINI TINI"
+                    loading="lazy"
+                />
+                <div class="album-info">
+                    <h3>TINI TINI TINI</h3>
+                    <span class="year-badge">2020</span>
+                    <p>
+                        <strong>Discográfica:</strong> Sony Music Latin<br />
+                        <strong>Idiomas:</strong> Español, inglés<br />
+                        <strong>Colaboraciones:</strong> María Becerra, Manuel
+                        Turizo, Khea, John C, Duki, Nicki Nicole
+                    </p>
+                    <p>
+                        Explosión creativa y consolidación internacional. Este
+                        álbum representó un punto de inflexión en su carrera con
+                        sonidos frescos que combinaban pop, reguetón y R&B.
+                        "Miénteme" con María Becerra se convirtió en un fenómeno
+                        viral global.
+                    </p>
+                    <div class="tracks">
+                        <span>Miénteme (ft. María Becerra)</span>
+                        <span>Maldita Foto (ft. Manuel Turizo)</span>
+                        <span>Ella Dice (ft. Khea)</span>
+                        <span>Duele (ft. John C)</span>
+                        <span>Un Beso en Madrid</span>
+                        <span>Te Vuélvete (ft. Duki)</span>
+                        <span>Ya No Me Llames</span>
+                        <span>Fresa</span>
+                        <span>Recuerdo</span>
+                        <span>Playa</span>
+                        <span>Bésame</span>
+                        <span>Tini Tini Tini</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cupido (2023) -->
+            <div class="album-card fade-right">
+                <img
+                    class="album-cover"
+                    src="https://upload.wikimedia.org/wikipedia/commons/c/c0/Concierto_Tini_Stoessel_Auditorio_Nacional_2023.jpg"
+                    alt="Cupido"
+                    loading="lazy"
+                />
+                <div class="album-info">
+                    <h3>Cupido</h3>
+                    <span class="year-badge">2023</span>
+                    <p>
+                        <strong>Discográfica:</strong> Sony Music Latin<br />
+                        <strong>Idiomas:</strong> Español, inglés<br />
+                        <strong>Colaboraciones:</strong> Becky G, Anitta,
+                        L-Gante, Tiago PZK
+                    </p>
+                    <p>
+                        Un álbum que explora el amor, el desamor y el
+                        empoderamiento femenino. "La Loto" con Becky G y Anitta
+                        se convirtió en un himno del poder femenino. El disco
+                        debutó en el top de listas latinas y consolidó a TINI
+                        como una de las artistas más importantes de la región.
+                    </p>
+                    <div class="tracks">
+                        <span>La Loto (ft. Becky G & Anitta)</span>
+                        <span>Bar (ft. L-Gante)</span>
+                        <span>Cupido</span>
+                        <span>Ni de la Universidad</span>
+                        <span>Carne y Hueso</span>
+                        <span>El Último Beso</span>
+                        <span>Me Enteré</span>
+                        <span>Las Jordans</span>
+                        <span>Dime Si No</span>
+                        <span>Quiero Volver (Versión Cupido)</span>
+                        <span>La Puerta</span>
+                        <span>Dejarte</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Un Mechón de Pelo (2024) -->
+            <div class="album-card fade-left">
+                <img
+                    class="album-cover"
+                    src="https://upload.wikimedia.org/wikipedia/commons/1/16/Tini_Stoessel_entrevista_2021.jpg"
+                    alt="Un Mechón de Pelo"
+                    loading="lazy"
+                />
+                <div class="album-info">
+                    <h3>Un Mechón de Pelo</h3>
+                    <span class="year-badge">2024</span>
+                    <p>
+                        <strong>Discográfica:</strong> Sony Music Latin<br />
+                        <strong>Idiomas:</strong> Español<br />
+                        <strong>Colaboraciones:</strong> Artistas invitados
+                    </p>
+                    <p>
+                        Su producción más íntima y personal. Un trabajo
+                        conceptual que muestra la faceta más vulnerable y
+                        auténtica de TINI. Con letras profundas y una producción
+                        cuidada, el álbum representa una nueva era artística y
+                        una evolución hacia un sonido más maduro y reflexivo.
+                    </p>
+                    <div class="tracks">
+                        <span>Pa Quererte</span>
+                        <span>Buenos Aires</span>
+                        <span>Posta</span>
+                        <span>Un Mechón de Pelo</span>
+                        <span>La Llorona</span>
+                        <span>Todo Pasa</span>
+                        <span>Martina</span>
+                        <span>Aún Te Pienso</span>
+                        <span>Volver a Casa</span>
+                        <span>Fin del Mundo</span>
+                        <span>Esto No Es un Adiós</span>
+                        <span>Para Siempre</span>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            <div class="wiki-content fade-in">
+                <h2>Resumen de Álbumes</h2>
+                <table class="wiki-table">
+                    <thead>
+                        <tr>
+                            <th>Álbum</th>
+                            <th>Año</th>
+                            <th>Sencillos Destacados</th>
+                            <th>Certificaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>TINI</strong> (Martina Stoessel)</td>
+                            <td>2016</td>
+                            <td>Siempre Brillarás, Great Escape</td>
+                            <td>Oro (ARG), Platino (varios)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Quiero Volver</strong></td>
+                            <td>2018</td>
+                            <td>Quiero Volver, 22, Princesa</td>
+                            <td>Oro (ARG, ESP)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TINI TINI TINI</strong></td>
+                            <td>2020</td>
+                            <td>Miénteme, Maldita Foto, Ella Dice</td>
+                            <td>Platino (varios países)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cupido</strong></td>
+                            <td>2023</td>
+                            <td>La Loto, Cupido, Carne y Hueso</td>
+                            <td>Oro, Platino</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Un Mechón de Pelo</strong></td>
+                            <td>2024</td>
+                            <td>Pa Quererte, Buenos Aires, Posta</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Sencillos -->
+            <div class="wiki-content fade-in">
+                <h2>Sencillos Destacados</h2>
+                <table class="wiki-table">
+                    <thead>
+                        <tr>
+                            <th>Sencillo</th>
+                            <th>Año</th>
+                            <th>Colaboración</th>
+                            <th>Álbum</th>
+                            <th>Reproducciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Siempre Brillarás</td>
+                            <td>2016</td>
+                            <td>—</td>
+                            <td>TINI</td>
+                            <td>+100M</td>
+                        </tr>
+                        <tr>
+                            <td>Great Escape</td>
+                            <td>2016</td>
+                            <td>—</td>
+                            <td>TINI</td>
+                            <td>+80M</td>
+                        </tr>
+                        <tr>
+                            <td>Quiero Volver</td>
+                            <td>2018</td>
+                            <td>Sebastián Yatra</td>
+                            <td>Quiero Volver</td>
+                            <td>+200M</td>
+                        </tr>
+                        <tr>
+                            <td>22</td>
+                            <td>2019</td>
+                            <td>Greeicy</td>
+                            <td>Quiero Volver</td>
+                            <td>+150M</td>
+                        </tr>
+                        <tr>
+                            <td>Miénteme</td>
+                            <td>2021</td>
+                            <td>María Becerra</td>
+                            <td>TINI TINI TINI</td>
+                            <td>+400M</td>
+                        </tr>
+                        <tr>
+                            <td>Maldita Foto</td>
+                            <td>2021</td>
+                            <td>Manuel Turizo</td>
+                            <td>TINI TINI TINI</td>
+                            <td>+250M</td>
+                        </tr>
+                        <tr>
+                            <td>La Loto</td>
+                            <td>2023</td>
+                            <td>Becky G, Anitta</td>
+                            <td>Cupido</td>
+                            <td>+150M</td>
+                        </tr>
+                        <tr>
+                            <td>Carne y Hueso</td>
+                            <td>2023</td>
+                            <td>—</td>
+                            <td>Cupido</td>
+                            <td>+100M</td>
+                        </tr>
+                        <tr>
+                            <td>Pa Quererte</td>
+                            <td>2024</td>
+                            <td>—</td>
+                            <td>Un Mechón de Pelo</td>
+                            <td>+50M</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px">
+                <a
+                    href="canciones.html"
+                    style="
+                        display: inline-block;
+                        padding: 12px 32px;
+                        background: linear-gradient(
+                            135deg,
+                            var(--accent),
+                            #6d28d9
+                        );
+                        color: #fff;
+                        border-radius: 30px;
+                        font-weight: 600;
+                    "
+                    >→ Ver lista completa de canciones</a
+                >
+            </div>
+        </main>
+
+        <footer class="wiki-footer">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <h3>TINI <span>Wiki</span></h3>
+                    <p>
+                        Una enciclopedia dedicada a la carrera y obra de Martina
+                        "TINI" Stoessel.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Contenido</h4>
+                    <ul>
+                        <li><a href="index.html">Portada</a></li>
+                        <li><a href="biografia.html">Biografía</a></li>
+                        <li><a href="canciones.html">Canciones</a></li>
+                        <li>
+                            <a href="colaboraciones.html">Colaboraciones</a>
+                        </li>
+                        <li><a href="datos.html">Datos Curiosos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Redes</h4>
+                    <ul>
+                        <li>
+                            <a
+                                href="https://www.instagram.com/tinistoessel/"
+                                target="_blank"
+                                >Instagram</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://open.spotify.com/intl-es/artist/7vXDAI8JwjW531ouMGbfcp"
+                                target="_blank"
+                                >Spotify</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://www.youtube.com/@TiniStoessel"
+                                target="_blank"
+                                >YouTube</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Más</h4>
+                    <ul>
+                        <li>
+                            <a
+                                href="https://es.wikipedia.org/wiki/Tini_Stoessel"
+                                target="_blank"
+                                >Wikipedia</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="../Proyecto%20Tini/index.html"
+                                target="_blank"
+                                >Fan Page</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 TINI Wiki</p>
+                <p>⚡ Hecho con pasión por los fans</p>
+            </div>
+        </footer>
+
+        <button id="backTop">↑</button>
+
+        <script>
+            window.addEventListener("load", () =>
+                document.getElementById("pageLoader").classList.add("hidden"),
+            );
+            setTimeout(
+                () =>
+                    document
+                        .getElementById("pageLoader")
+                        .classList.add("hidden"),
+                1500,
+            );
+            document.addEventListener("mousemove", (e) => {
+                const g = document.getElementById("mouseGlow");
+                g.style.left = e.clientX + "px";
+                g.style.top = e.clientY + "px";
+            });
+            const topBar = document.getElementById("topBar");
+            const backBtn = document.getElementById("backTop");
+            document
+                .querySelectorAll(
+                    ".fade-in, .fade-left, .fade-right, .fade-scale",
+                )
+                .forEach((el) => {
+                    new IntersectionObserver(
+                        (entries) => {
+                            entries.forEach((e) => {
+                                if (e.isIntersecting)
+                                    e.target.classList.add("visible");
+                            });
+                        },
+                        { threshold: 0.1 },
+                    ).observe(el);
+                });
+            window.addEventListener("scroll", () => {
+                topBar.classList.toggle("scrolled", window.scrollY > 50);
+                backBtn.classList.toggle("show", window.scrollY > 400);
+            });
+            backBtn.addEventListener("click", () =>
+                window.scrollTo({ top: 0, behavior: "smooth" }),
+            );
+            const notes = document.getElementById("floatingNotes");
+            const syms = ["♪", "♫", "♬", "♩", "♪", "♫", "♬", "♩"];
+            const noteClasses = [
+                "note-1",
+                "note-2",
+                "note-3",
+                "note-4",
+                "note-5",
+            ];
+            for (let i = 0; i < 35; i++) {
+                const s = document.createElement("span");
+                s.className = "note " + noteClasses[i % noteClasses.length];
+                s.textContent = syms[i % syms.length];
+                s.style.left = Math.random() * 100 + "%";
+                s.style.animationDuration = 18 + Math.random() * 35 + "s";
+                s.style.animationDelay = Math.random() * 25 + "s";
+                s.style.fontSize = 1.4 + Math.random() * 2.2 + "rem";
+                notes.appendChild(s);
+            }
+            const orbColors = ["purple", "cyan", "pink"];
+            for (let i = 0; i < 3; i++) {
+                const orb = document.createElement("div");
+                orb.className = "scroll-orb " + orbColors[i];
+                orb.style.left = 20 + i * 30 + "%";
+                orb.style.top = 10 + i * 25 + "%";
+                document.body.appendChild(orb);
+                window.addEventListener("scroll", () => {
+                    orb.style.transform = `translateY(${window.scrollY * (0.05 + i * 0.03)}px)`;
+                });
+            }
+            document.querySelectorAll(".card").forEach((card) => {
+                card.addEventListener("mousemove", (e) => {
+                    const rect = card.getBoundingClientRect();
+                    card.style.setProperty(
+                        "--mx",
+                        ((e.clientX - rect.left) / rect.width) * 100 + "%",
+                    );
+                    card.style.setProperty(
+                        "--my",
+                        ((e.clientY - rect.top) / rect.height) * 100 + "%",
+                    );
+                });
+            });
+        </script>
+    </body>
+</html>

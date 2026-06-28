@@ -1,0 +1,1156 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Canciones de TINI — TINI Wiki</title>
+        <link rel="stylesheet" href="estilo.css" />
+        <style>
+            /* ===== TABLAS UNIFORMES ===== */
+            .wiki-table {
+                width: 100%;
+                margin-bottom: 30px;
+                border-collapse: separate;
+                border-spacing: 0;
+            }
+            .wiki-table th,
+            .wiki-table td {
+                padding: 12px 16px;
+                text-align: left;
+                border-bottom: 1px solid var(--border);
+                white-space: normal;
+                word-break: break-word;
+            }
+            .wiki-table th {
+                background: rgba(167, 139, 250, 0.08);
+                font-size: 0.8rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: var(--accent);
+                font-weight: 600;
+            }
+            .wiki-table tbody tr:hover {
+                background: rgba(167, 139, 250, 0.04);
+            }
+            .wiki-content h3 {
+                margin-top: 36px;
+                margin-bottom: 14px;
+                font-size: 1.3rem;
+                color: #fff;
+                border-left: 3px solid var(--accent);
+                padding-left: 14px;
+            }
+
+            /* ===== MUSIC CARDS EN PÁGINA DE CANCIONES ===== */
+            .music-list {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+                gap: 16px;
+                margin: 30px 0;
+            }
+            .music-list-item {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                background: var(--bg-card);
+                border: 1px solid var(--border);
+                border-radius: 14px;
+                padding: 14px 18px;
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+            .music-list-item:hover {
+                border-color: rgba(167, 139, 250, 0.3);
+                transform: translateX(6px);
+                box-shadow: -4px 0 20px rgba(167, 139, 250, 0.1);
+            }
+            .music-list-item .ml-icon {
+                width: 42px;
+                height: 42px;
+                border-radius: 50%;
+                background: rgba(167, 139, 250, 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1rem;
+                flex-shrink: 0;
+                transition: all 0.3s ease;
+            }
+            .music-list-item:hover .ml-icon {
+                background: rgba(167, 139, 250, 0.2);
+            }
+            .music-list-item .ml-info {
+                flex: 1;
+                min-width: 0;
+            }
+            .music-list-item .ml-title {
+                font-size: 0.95rem;
+                font-weight: 600;
+                color: #fff;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .music-list-item .ml-artist {
+                font-size: 0.8rem;
+                color: var(--text-dim);
+            }
+            .music-list-item .ml-play {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                background: transparent;
+                color: #fff;
+                font-size: 0.85rem;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                flex-shrink: 0;
+            }
+            .music-list-item .ml-play:hover {
+                background: var(--accent);
+                border-color: var(--accent);
+                transform: scale(1.1);
+            }
+            .music-list-item .ml-play.playing {
+                background: var(--accent3);
+                border-color: var(--accent3);
+            }
+            @media (max-width: 768px) {
+                .music-list {
+                    grid-template-columns: 1fr;
+                }
+                .wiki-table {
+                    font-size: 0.85rem;
+                }
+                .wiki-table th,
+                .wiki-table td {
+                    padding: 8px 10px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page-loader" id="pageLoader">
+            <div class="loader-spinner"></div>
+            <div class="loader-text">Cargando...</div>
+        </div>
+        <div id="mouseGlow"></div>
+        <nav class="navbar" id="topBar">
+            <a href="index.html">Portada</a>
+            <a href="biografia.html">Biografía</a>
+            <a href="discografia.html">Discografía</a>
+            <span class="nav-icon">🎵</span>
+            <a href="canciones.html" class="active">Canciones</a>
+            <a href="colaboraciones.html">Colaboraciones</a>
+            <a href="datos.html">Datos Curiosos</a>
+        </nav>
+        <div class="floating-notes" id="floatingNotes"></div>
+        <section class="wiki-hero hero">
+            <div class="hero-img-wrap">
+                <img src="canciones-hero.jpg" alt="TINI" />
+            </div>
+            <div class="hero-text-container">
+                <span class="hero-badge">✦ Canciones ✦</span>
+                <h1>Los temas de <em>TINI</em></h1>
+                <p>
+                    Listado completo de canciones de Martina Stoessel — todos
+                    sus hits, baladas y colaboraciones.
+                </p>
+                <div class="hero-tags">
+                    <span>🎵 +80 Canciones</span>
+                    <span>🎤 Pop, Urbano, Baladas</span>
+                </div>
+            </div>
+        </section>
+
+        <main style="max-width: 1200px; margin: 0 auto; padding: 0 32px 80px">
+            <div class="wiki-content fade-in">
+                <h2>Todas las Canciones</h2>
+                <p>
+                    A continuación, el listado completo de canciones de TINI,
+                    incluyendo año, género y álbum al que pertenecen.
+                </p>
+
+                <h3>Álbum: TINI (2016)</h3>
+                <table class="wiki-table">
+                    <thead>
+                        <tr>
+                            <th>Canción</th>
+                            <th>Año</th>
+                            <th>Género</th>
+                            <th>Dato Curioso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Siempre Brillarás</td>
+                            <td>2016</td>
+                            <td>Pop</td>
+                            <td>
+                                Himno oficial de la película "TINI: El Gran
+                                Cambio de Violetta"
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Great Escape</td>
+                            <td>2016</td>
+                            <td>Pop</td>
+                            <td>
+                                Himno de los Juegos Olímpicos de la Juventud
+                                2018
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Got Me Started</td>
+                            <td>2016</td>
+                            <td>Pop / Dance</td>
+                            <td>
+                                Grabada en inglés, mostró su versatilidad
+                                internacional
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Yo Te Amo</td>
+                            <td>2016</td>
+                            <td>Balada</td>
+                            <td>Dedicada a sus fans, los "Tinistas"</td>
+                        </tr>
+                        <tr>
+                            <td>Ya No Hay Nadie</td>
+                            <td>2016</td>
+                            <td>Pop</td>
+                            <td>Coescrita por TINI</td>
+                        </tr>
+                        <tr>
+                            <td>Te Quiero Más</td>
+                            <td>2016</td>
+                            <td>Pop</td>
+                            <td>Versión en español de "Finders Keepers"</td>
+                        </tr>
+                        <tr>
+                            <td>Losing the Love</td>
+                            <td>2016</td>
+                            <td>Pop / Balada</td>
+                            <td>Una de sus primeras canciones en inglés</td>
+                        </tr>
+                        <tr>
+                            <td>Finders Keepers</td>
+                            <td>2016</td>
+                            <td>Pop</td>
+                            <td>Canción en inglés con sonido internacional</td>
+                        </tr>
+                        <tr>
+                            <td>Mi Amor</td>
+                            <td>2016</td>
+                            <td>Pop</td>
+                            <td>Letra romántica y pegadiza</td>
+                        </tr>
+                        <tr>
+                            <td>Si Tú Te Vas</td>
+                            <td>2016</td>
+                            <td>Balada</td>
+                            <td>Una de las más emotivas del álbum</td>
+                        </tr>
+                        <tr>
+                            <td>Corazón</td>
+                            <td>2016</td>
+                            <td>Pop</td>
+                            <td>Ritmo alegre y bailable</td>
+                        </tr>
+                        <tr>
+                            <td>Sueños</td>
+                            <td>2016</td>
+                            <td>Pop</td>
+                            <td>Canción inspiradora sobre seguir tus metas</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Álbum: Quiero Volver (2018)</h3>
+                <table class="wiki-table">
+                    <thead>
+                        <tr>
+                            <th>Canción</th>
+                            <th>Año</th>
+                            <th>Género</th>
+                            <th>Colaboración</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Quiero Volver</td>
+                            <td>2018</td>
+                            <td>Pop Latino</td>
+                            <td>Sebastián Yatra</td>
+                        </tr>
+                        <tr>
+                            <td>Princesa</td>
+                            <td>2018</td>
+                            <td>Reguetón / Pop</td>
+                            <td>Karol G</td>
+                        </tr>
+                        <tr>
+                            <td>Por Qué Te Vas</td>
+                            <td>2018</td>
+                            <td>Pop</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Oye</td>
+                            <td>2019</td>
+                            <td>Pop / Balada</td>
+                            <td>Sebastián Yatra</td>
+                        </tr>
+                        <tr>
+                            <td>22</td>
+                            <td>2019</td>
+                            <td>Pop</td>
+                            <td>Greeicy</td>
+                        </tr>
+                        <tr>
+                            <td>Love Is Love</td>
+                            <td>2018</td>
+                            <td>Pop</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Te Pedí</td>
+                            <td>2018</td>
+                            <td>Balada</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Flaco</td>
+                            <td>2018</td>
+                            <td>Pop</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Ya No Me Duele</td>
+                            <td>2018</td>
+                            <td>Pop</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>No Soy Ahí</td>
+                            <td>2018</td>
+                            <td>Pop Latino</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Antes de Ti</td>
+                            <td>2018</td>
+                            <td>Balada</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Recuerdo</td>
+                            <td>2018</td>
+                            <td>Pop</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Álbum: TINI TINI TINI (2020)</h3>
+                <table class="wiki-table">
+                    <thead>
+                        <tr>
+                            <th>Canción</th>
+                            <th>Año</th>
+                            <th>Género</th>
+                            <th>Colaboración</th>
+                            <th>Reproducciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Miénteme</td>
+                            <td>2021</td>
+                            <td>Urbano / Pop</td>
+                            <td>María Becerra</td>
+                            <td>+400M</td>
+                        </tr>
+                        <tr>
+                            <td>Maldita Foto</td>
+                            <td>2021</td>
+                            <td>Urbano</td>
+                            <td>Manuel Turizo</td>
+                            <td>+250M</td>
+                        </tr>
+                        <tr>
+                            <td>Ella Dice</td>
+                            <td>2021</td>
+                            <td>Urbano / Trap</td>
+                            <td>Khea</td>
+                            <td>+100M</td>
+                        </tr>
+                        <tr>
+                            <td>Duele</td>
+                            <td>2021</td>
+                            <td>Balada / Pop</td>
+                            <td>John C</td>
+                            <td>+80M</td>
+                        </tr>
+                        <tr>
+                            <td>Un Beso en Madrid</td>
+                            <td>2020</td>
+                            <td>Pop</td>
+                            <td>—</td>
+                            <td>+60M</td>
+                        </tr>
+                        <tr>
+                            <td>Te Vuélvete</td>
+                            <td>2021</td>
+                            <td>Urbano</td>
+                            <td>Duki</td>
+                            <td>+50M</td>
+                        </tr>
+                        <tr>
+                            <td>Ya No Me Llames</td>
+                            <td>2020</td>
+                            <td>Pop</td>
+                            <td>—</td>
+                            <td>+40M</td>
+                        </tr>
+                        <tr>
+                            <td>Fresa</td>
+                            <td>2020</td>
+                            <td>Pop</td>
+                            <td>—</td>
+                            <td>+30M</td>
+                        </tr>
+                        <tr>
+                            <td>Playa</td>
+                            <td>2020</td>
+                            <td>Pop / Tropical</td>
+                            <td>—</td>
+                            <td>+30M</td>
+                        </tr>
+                        <tr>
+                            <td>Bésame</td>
+                            <td>2020</td>
+                            <td>Pop</td>
+                            <td>—</td>
+                            <td>+25M</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Álbum: Cupido (2023)</h3>
+                <table class="wiki-table">
+                    <thead>
+                        <tr>
+                            <th>Canción</th>
+                            <th>Año</th>
+                            <th>Género</th>
+                            <th>Colaboración</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>La Loto</td>
+                            <td>2023</td>
+                            <td>Pop / Urbano</td>
+                            <td>Becky G, Anitta</td>
+                        </tr>
+                        <tr>
+                            <td>Bar</td>
+                            <td>2023</td>
+                            <td>Urbano / Cumbia</td>
+                            <td>L-Gante</td>
+                        </tr>
+                        <tr>
+                            <td>Cupido</td>
+                            <td>2023</td>
+                            <td>Pop</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Ni de la Universidad</td>
+                            <td>2023</td>
+                            <td>Pop</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Carne y Hueso</td>
+                            <td>2023</td>
+                            <td>Balada</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>El Último Beso</td>
+                            <td>2023</td>
+                            <td>Pop</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Me Enteré</td>
+                            <td>2023</td>
+                            <td>Urbano</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Las Jordans</td>
+                            <td>2023</td>
+                            <td>Pop</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Dime Si No</td>
+                            <td>2023</td>
+                            <td>Balada</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>La Puerta</td>
+                            <td>2023</td>
+                            <td>Pop</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Dejarte</td>
+                            <td>2023</td>
+                            <td>Pop / Balada</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Álbum: Un Mechón de Pelo (2024)</h3>
+                <table class="wiki-table">
+                    <thead>
+                        <tr>
+                            <th>Canción</th>
+                            <th>Año</th>
+                            <th>Género</th>
+                            <th>Dato</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pa Quererte</td>
+                            <td>2024</td>
+                            <td>Pop</td>
+                            <td>Sencillo principal del álbum</td>
+                        </tr>
+                        <tr>
+                            <td>Buenos Aires</td>
+                            <td>2024</td>
+                            <td>Pop / Balada</td>
+                            <td>Homenaje a su ciudad natal</td>
+                        </tr>
+                        <tr>
+                            <td>Posta</td>
+                            <td>2024</td>
+                            <td>Pop</td>
+                            <td>Ritmo fresco y moderno</td>
+                        </tr>
+                        <tr>
+                            <td>Un Mechón de Pelo</td>
+                            <td>2024</td>
+                            <td>Balada</td>
+                            <td>
+                                Canción que da título al álbum, muy personal
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>La Llorona</td>
+                            <td>2024</td>
+                            <td>Pop / Folk</td>
+                            <td>Con influencias de música popular argentina</td>
+                        </tr>
+                        <tr>
+                            <td>Todo Pasa</td>
+                            <td>2024</td>
+                            <td>Balada</td>
+                            <td>Letra reflexiva sobre el paso del tiempo</td>
+                        </tr>
+                        <tr>
+                            <td>Martina</td>
+                            <td>2024</td>
+                            <td>Pop</td>
+                            <td>Canción autobiográfica</td>
+                        </tr>
+                        <tr>
+                            <td>Aún Te Pienso</td>
+                            <td>2024</td>
+                            <td>Balada</td>
+                            <td>Una de las más emotivas del disco</td>
+                        </tr>
+                        <tr>
+                            <td>Volver a Casa</td>
+                            <td>2024</td>
+                            <td>Pop</td>
+                            <td>Tema sobre la nostalgia y el hogar</td>
+                        </tr>
+                        <tr>
+                            <td>Fin del Mundo</td>
+                            <td>2024</td>
+                            <td>Pop / Rock</td>
+                            <td>Sonido más enérgico</td>
+                        </tr>
+                        <tr>
+                            <td>Esto No Es un Adiós</td>
+                            <td>2024</td>
+                            <td>Balada</td>
+                            <td>Emotiva despedida musical</td>
+                        </tr>
+                        <tr>
+                            <td>Para Siempre</td>
+                            <td>2024</td>
+                            <td>Pop</td>
+                            <td>Cierre del álbum, mensaje de esperanza</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="wiki-content fade-in">
+                <h2>Sencillos Sueltos y Colaboraciones</h2>
+                <table class="wiki-table">
+                    <thead>
+                        <tr>
+                            <th>Canción</th>
+                            <th>Año</th>
+                            <th>Artistas</th>
+                            <th>Tipo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Consejo de Amor</td>
+                            <td>2020</td>
+                            <td>TINI, Morat</td>
+                            <td>Colaboración</td>
+                        </tr>
+                        <tr>
+                            <td>High (Remix)</td>
+                            <td>2021</td>
+                            <td>TINI, María Becerra</td>
+                            <td>Remix</td>
+                        </tr>
+                        <tr>
+                            <td>La Triple T</td>
+                            <td>2022</td>
+                            <td>TINI</td>
+                            <td>Sencillo</td>
+                        </tr>
+                        <tr>
+                            <td>Muñecas</td>
+                            <td>2023</td>
+                            <td>TINI, Anitta, La Joaqui</td>
+                            <td>Colaboración</td>
+                        </tr>
+                        <tr>
+                            <td>Pa Quererte (Remix)</td>
+                            <td>2024</td>
+                            <td>TINI, Duki</td>
+                            <td>Remix</td>
+                        </tr>
+                        <tr>
+                            <td>El Amor Que Me Tenías</td>
+                            <td>2023</td>
+                            <td>TINI, Ricardo Arjona</td>
+                            <td>Colaboración</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="wiki-content fade-in">
+                <div class="info-box" style="margin: 0">
+                    <span class="icon">🎯</span>
+                    <p>
+                        <strong>¿Sabías que?</strong> "Miénteme" con María
+                        Becerra fue #1 en tendencias globales de YouTube y
+                        TikTok simultáneamente, y acumula más de 400 millones de
+                        reproducciones en YouTube.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ===== REPRODUCTOR DE CANCIONES ===== -->
+            <div class="section-header fade-in" style="margin-top: 60px">
+                <h2>🎵 Escucha las Canciones</h2>
+                <p>Haz clic en el botón ▶ para reproducir</p>
+                <div class="line"></div>
+            </div>
+
+            <div class="music-list" id="cancionesMusicList">
+                <div class="music-list-item" data-file="siempre_brillaras">
+                    <span class="ml-icon">🎤</span>
+                    <div class="ml-info">
+                        <div class="ml-title">Siempre Brillarás</div>
+                        <div class="ml-artist">TINI</div>
+                    </div>
+                    <button
+                        class="ml-play"
+                        onclick="
+                            playCancion(
+                                'siempre_brillaras',
+                                'Siempre Brillarás',
+                                'TINI',
+                                this,
+                            )
+                        "
+                    >
+                        ▶
+                    </button>
+                </div>
+                <div class="music-list-item" data-file="quiero_volver">
+                    <span class="ml-icon">💫</span>
+                    <div class="ml-info">
+                        <div class="ml-title">Quiero Volver</div>
+                        <div class="ml-artist">TINI, Sebastián Yatra</div>
+                    </div>
+                    <button
+                        class="ml-play"
+                        onclick="
+                            playCancion(
+                                'quiero_volver',
+                                'Quiero Volver',
+                                'TINI, Sebastián Yatra',
+                                this,
+                            )
+                        "
+                    >
+                        ▶
+                    </button>
+                </div>
+                <div class="music-list-item" data-file="mienteme">
+                    <span class="ml-icon">🎶</span>
+                    <div class="ml-info">
+                        <div class="ml-title">Miénteme</div>
+                        <div class="ml-artist">TINI, María Becerra</div>
+                    </div>
+                    <button
+                        class="ml-play"
+                        onclick="
+                            playCancion(
+                                'mienteme',
+                                'Miénteme',
+                                'TINI, María Becerra',
+                                this,
+                            )
+                        "
+                    >
+                        ▶
+                    </button>
+                </div>
+                <div class="music-list-item" data-file="la_loto">
+                    <span class="ml-icon">💎</span>
+                    <div class="ml-info">
+                        <div class="ml-title">La Loto</div>
+                        <div class="ml-artist">TINI, Becky G, Anitta</div>
+                    </div>
+                    <button
+                        class="ml-play"
+                        onclick="
+                            playCancion(
+                                'la_loto',
+                                'La Loto',
+                                'TINI, Becky G, Anitta',
+                                this,
+                            )
+                        "
+                    >
+                        ▶
+                    </button>
+                </div>
+                <div class="music-list-item" data-file="carne_y_hueso">
+                    <span class="ml-icon">🎸</span>
+                    <div class="ml-info">
+                        <div class="ml-title">Carne y Hueso</div>
+                        <div class="ml-artist">TINI</div>
+                    </div>
+                    <button
+                        class="ml-play"
+                        onclick="
+                            playCancion(
+                                'carne_y_hueso',
+                                'Carne y Hueso',
+                                'TINI',
+                                this,
+                            )
+                        "
+                    >
+                        ▶
+                    </button>
+                </div>
+                <div class="music-list-item" data-file="maldita_foto">
+                    <span class="ml-icon">📸</span>
+                    <div class="ml-info">
+                        <div class="ml-title">Maldita Foto</div>
+                        <div class="ml-artist">TINI, Manuel Turizo</div>
+                    </div>
+                    <button
+                        class="ml-play"
+                        onclick="
+                            playCancion(
+                                'maldita_foto',
+                                'Maldita Foto',
+                                'TINI, Manuel Turizo',
+                                this,
+                            )
+                        "
+                    >
+                        ▶
+                    </button>
+                </div>
+                <div class="music-list-item" data-file="22">
+                    <span class="ml-icon">🎂</span>
+                    <div class="ml-info">
+                        <div class="ml-title">22</div>
+                        <div class="ml-artist">TINI, Greeicy</div>
+                    </div>
+                    <button
+                        class="ml-play"
+                        onclick="playCancion('22', '22', 'TINI, Greeicy', this)"
+                    >
+                        ▶
+                    </button>
+                </div>
+                <div class="music-list-item" data-file="great_escape">
+                    <span class="ml-icon">🌍</span>
+                    <div class="ml-info">
+                        <div class="ml-title">Great Escape</div>
+                        <div class="ml-artist">TINI</div>
+                    </div>
+                    <button
+                        class="ml-play"
+                        onclick="
+                            playCancion(
+                                'great_escape',
+                                'Great Escape',
+                                'TINI',
+                                this,
+                            )
+                        "
+                    >
+                        ▶
+                    </button>
+                </div>
+                <div class="music-list-item" data-file="consejo_de_amor">
+                    <span class="ml-icon">💌</span>
+                    <div class="ml-info">
+                        <div class="ml-title">Consejo de Amor</div>
+                        <div class="ml-artist">TINI, Morat</div>
+                    </div>
+                    <button
+                        class="ml-play"
+                        onclick="
+                            playCancion(
+                                'consejo_de_amor',
+                                'Consejo de Amor',
+                                'TINI, Morat',
+                                this,
+                            )
+                        "
+                    >
+                        ▶
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Hidden audio element -->
+        <audio id="playerCanciones" preload="auto"></audio>
+
+        <!-- Now Playing mini bar -->
+        <div
+            class="npb-mini"
+            id="npbMini"
+            style="
+                display: none;
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                z-index: 9999;
+                background: var(--bg-card);
+                border: 1px solid var(--border);
+                border-radius: 16px;
+                padding: 12px 20px;
+                align-items: center;
+                gap: 12px;
+                backdrop-filter: blur(16px);
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            "
+        >
+            <span id="npbMiniIcon" style="font-size: 1.2rem">🎵</span>
+            <div style="flex: 1; min-width: 0">
+                <div
+                    id="npbMiniTitle"
+                    style="
+                        font-size: 0.85rem;
+                        font-weight: 600;
+                        color: #fff;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    "
+                >
+                    Siempre Brillarás
+                </div>
+                <div
+                    id="npbMiniArtist"
+                    style="font-size: 0.7rem; color: var(--text-dim)"
+                >
+                    TINI
+                </div>
+            </div>
+            <button
+                id="npbMiniPlay"
+                onclick="toggleCancion()"
+                style="
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background: transparent;
+                    color: #fff;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 0.8rem;
+                "
+            >
+                ⏸
+            </button>
+        </div>
+
+        <footer class="wiki-footer">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <h3>TINI <span>Wiki</span></h3>
+                    <p>
+                        Una enciclopedia dedicada a la carrera y obra de Martina
+                        "TINI" Stoessel.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Contenido</h4>
+                    <ul>
+                        <li><a href="index.html">Portada</a></li>
+                        <li><a href="biografia.html">Biografía</a></li>
+                        <li><a href="discografia.html">Discografía</a></li>
+                        <li>
+                            <a href="colaboraciones.html">Colaboraciones</a>
+                        </li>
+                        <li><a href="datos.html">Datos Curiosos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Redes</h4>
+                    <ul>
+                        <li>
+                            <a
+                                href="https://www.instagram.com/tinistoessel/"
+                                target="_blank"
+                                >Instagram</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://open.spotify.com/intl-es/artist/7vXDAI8JwjW531ouMGbfcp"
+                                target="_blank"
+                                >Spotify</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://www.youtube.com/@TiniStoessel"
+                                target="_blank"
+                                >YouTube</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Más</h4>
+                    <ul>
+                        <li>
+                            <a
+                                href="https://es.wikipedia.org/wiki/Tini_Stoessel"
+                                target="_blank"
+                                >Wikipedia</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="../Proyecto%20Tini/index.html"
+                                target="_blank"
+                                >Fan Page</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 TINI Wiki</p>
+                <p>⚡ Hecho con pasión por los fans</p>
+            </div>
+        </footer>
+        <button id="backTop">↑</button>
+
+        <script>
+            window.addEventListener("load", () =>
+                document.getElementById("pageLoader").classList.add("hidden"),
+            );
+            setTimeout(
+                () =>
+                    document
+                        .getElementById("pageLoader")
+                        .classList.add("hidden"),
+                1500,
+            );
+            document.addEventListener("mousemove", (e) => {
+                const g = document.getElementById("mouseGlow");
+                g.style.left = e.clientX + "px";
+                g.style.top = e.clientY + "px";
+            });
+            const topBar = document.getElementById("topBar");
+            const backBtn = document.getElementById("backTop");
+            document
+                .querySelectorAll(
+                    ".fade-in, .fade-left, .fade-right, .fade-scale",
+                )
+                .forEach((el) => {
+                    new IntersectionObserver(
+                        (entries) => {
+                            entries.forEach((e) => {
+                                if (e.isIntersecting)
+                                    e.target.classList.add("visible");
+                            });
+                        },
+                        { threshold: 0.1 },
+                    ).observe(el);
+                });
+            window.addEventListener("scroll", () => {
+                topBar.classList.toggle("scrolled", window.scrollY > 50);
+                backBtn.classList.toggle("show", window.scrollY > 400);
+            });
+            backBtn.addEventListener("click", () =>
+                window.scrollTo({ top: 0, behavior: "smooth" }),
+            );
+            const notes = document.getElementById("floatingNotes");
+            const syms = ["♪", "♫", "♬", "♩", "♪", "♫", "♬", "♩"];
+            const noteClasses = [
+                "note-1",
+                "note-2",
+                "note-3",
+                "note-4",
+                "note-5",
+            ];
+            for (let i = 0; i < 35; i++) {
+                const s = document.createElement("span");
+                s.className = "note " + noteClasses[i % noteClasses.length];
+                s.textContent = syms[i % syms.length];
+                s.style.left = Math.random() * 100 + "%";
+                s.style.animationDuration = 18 + Math.random() * 35 + "s";
+                s.style.animationDelay = Math.random() * 25 + "s";
+                s.style.fontSize = 1.4 + Math.random() * 2.2 + "rem";
+                notes.appendChild(s);
+            }
+            const orbColors = ["purple", "cyan", "pink"];
+            for (let i = 0; i < 3; i++) {
+                const orb = document.createElement("div");
+                orb.className = "scroll-orb " + orbColors[i];
+                orb.style.left = 20 + i * 30 + "%";
+                orb.style.top = 10 + i * 25 + "%";
+                document.body.appendChild(orb);
+                window.addEventListener("scroll", () => {
+                    orb.style.transform = `translateY(${window.scrollY * (0.05 + i * 0.03)}px)`;
+                });
+            }
+            document.querySelectorAll(".card").forEach((card) => {
+                card.addEventListener("mousemove", (e) => {
+                    const rect = card.getBoundingClientRect();
+                    card.style.setProperty(
+                        "--mx",
+                        ((e.clientX - rect.left) / rect.width) * 100 + "%",
+                    );
+                    card.style.setProperty(
+                        "--my",
+                        ((e.clientY - rect.top) / rect.height) * 100 + "%",
+                    );
+                });
+            });
+
+            // ===== REPRODUCTOR DE CANCIONES =====
+            const playerAudio = document.getElementById("playerCanciones");
+            const npbMini = document.getElementById("npbMini");
+            const npbMiniTitle = document.getElementById("npbMiniTitle");
+            const npbMiniArtist = document.getElementById("npbMiniArtist");
+            const npbMiniPlay = document.getElementById("npbMiniPlay");
+            let currentPlayingBtn = null;
+
+            window.playCancion = function (file, title, artist, btn) {
+                // Reset previous button
+                if (currentPlayingBtn && currentPlayingBtn !== btn) {
+                    currentPlayingBtn.textContent = "▶";
+                    currentPlayingBtn.classList.remove("playing");
+                }
+
+                if (playerAudio.src.includes(file) && !playerAudio.paused) {
+                    // Same song, toggle pause
+                    playerAudio.pause();
+                    btn.textContent = "▶";
+                    btn.classList.remove("playing");
+                    currentPlayingBtn = null;
+                    npbMiniPlay.textContent = "▶";
+                    return;
+                }
+
+                playerAudio.src = file + ".mp3";
+                playerAudio.load();
+                playerAudio
+                    .play()
+                    .then(() => {
+                        btn.textContent = "⏸";
+                        btn.classList.add("playing");
+                        currentPlayingBtn = btn;
+                        npbMiniTitle.textContent = title;
+                        npbMiniArtist.textContent = artist;
+                        npbMini.style.display = "flex";
+                        npbMiniPlay.textContent = "⏸";
+                    })
+                    .catch(function (e) {
+                        console.warn("Error al reproducir:", e);
+                        btn.textContent = "▶";
+                        btn.classList.remove("playing");
+                    });
+
+                playerAudio.onended = function () {
+                    btn.textContent = "▶";
+                    btn.classList.remove("playing");
+                    currentPlayingBtn = null;
+                    npbMiniPlay.textContent = "▶";
+                };
+            };
+
+            window.toggleCancion = function () {
+                if (playerAudio.paused) {
+                    playerAudio.play();
+                    npbMiniPlay.textContent = "⏸";
+                    if (currentPlayingBtn) {
+                        currentPlayingBtn.textContent = "⏸";
+                        currentPlayingBtn.classList.add("playing");
+                    }
+                } else {
+                    playerAudio.pause();
+                    npbMiniPlay.textContent = "▶";
+                    if (currentPlayingBtn) {
+                        currentPlayingBtn.textContent = "▶";
+                        currentPlayingBtn.classList.remove("playing");
+                    }
+                }
+            };
+        </script>
+    </body>
+</html>
