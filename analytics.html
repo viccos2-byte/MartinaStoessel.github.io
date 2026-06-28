@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analytics — TINI Wiki</title>
+    <link rel="stylesheet" href="estilo.css" />
+    <style>
+        /* ===== ESTILOS DEL</title> DASHBOARD ===== */
+        .analytics-header {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+        .analytics-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a78bfa, #f9a8d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .analytics-header p {
+            color: var(--text-dim);
+            font-size: 1.05rem;
+            margin-top: 8px;
+        }
+        .analytics-header .badge-live {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            animation: pulse-badge 1.5s infinite;
+        }
+        @keyframes pulse-badge {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            border-color: rgba(167, 139, 250, 0.3);
+            transform: translateY(-2px);
+        }
+        .stat-card .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        .stat-card .stat-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a78bfa, #f9a8d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-card .stat-label {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+        .stat-card .stat-sub {
+            color: rgba(255,255,255,0.3);
+            font-size: 0.75rem;
+            margin-top: 6px;
+        }
+
+        .section-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+        .section-card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #c4b5fd;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .click-grid {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .click-cat {
+            flex: 1;
+            min-width: 100px;
+            background: rgba(167, 139, 250, 0.06);
+            border: 1px solid rgba(167, 139, 250, 0.12);
+            border-radius: 10px;
+            padding: 14px;
+            text-align: center;
+        }
+        .click-cat .cat-icon { font-size: 1.3rem; }
+        .click-cat .cat-value { font-weight: 700; font-size: 1.2rem; display: block; margin: 4px 0; }
+        .click-cat .cat-label { font-size: 0.75rem; color: var(--text-dim); }
+
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+            height: 150px;
+            padding: 16px 0;
+        }
+        .bar-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+        .bar-stack {
+            display: flex;
+            gap: 2px;
+            width: 100%;
+            justify-content: center;
+        }
+        .bar {
+            width: 8px;
+            border-radius: 4px 4px 0 0;
+            min-height: 3px;
+            transition: height 0.5s ease;
+        }
+        .bar.visits { background: linear-gradient(180deg, #a78bfa, #7c3aed); }
+        .bar.clicks { background: linear-gradient(180deg, #f9a8d4, #ec4899); }
+        .bar.time { background: linear-gradient(180deg, #fcd34d, #f59e0b); }
+        .bar.songs { background: linear-gradient(180deg, #34d399, #10b981); }
+        .bar-label {
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        .bar-legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            margin-top: 8px;
+        }
+        .bar-legend span { display: flex; align-items: center; gap: 6px; }
+        .legend-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .song-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .song-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            background: rgba(167, 139, 250, 0.04);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        .song-row .song-name { color: #e0d6ff; }
+        .song-row .song-count { color: #a78bfa; font-weight: 700; }
+        .song-progress {
+            height: 4px;
+            background: rgba(167, 139, 250, 0.1);
+            border-radius: 2px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+        .song-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #7c3aed, #a78bfa);
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-dim);
+        }
+        .empty-state span { font-size: 3rem; display: block; margin-bottom: 12px; }
+
+        .btn-reset {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 10px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-top: 16px;
+            transition: all 0.3s;
+        }
+        .btn-reset:hover { background: rgba(239, 68, 68, 0.2); }
+
+        .nav-analytics {
+            color: var(--accent) !important;
+            position: relative;
+        }
+        .nav-analytics::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 12px;
+            right: 12px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 1px;
+        }
+
+        @media (max-width: 600px) {
+            .analytics-header h1 { font-size: 1.6rem; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .stat-card .stat-value { font-size: 1.6rem; }
+            .click-cat { min-width: calc(50% - 5px); }
+            .bar-chart { height: 100px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="topBar">
+        <a href="index.html">Portada</a>
+        <a href="biografia.html">Biografía</a>
+        <a href="discografia.html">Discografía</a>
+        <span class="nav-icon">🎵</span>
+        <a href="canciones.html">Canciones</a>
+        <a href="colaboraciones.html">Colaboraciones</a>
+        <a href="datos.html">Datos Curiosos</a>
+        <a href="analytics.html" class="nav-analytics">📊 Analytics</a>
+    </nav>
+
+    <!-- ===== FLOATING NOTES ===== -->
+    <div class="floating-notes" id="floatingNotes"></div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="wiki-content" style="max-width: 1000px; margin: 0 auto; padding: 120px 20px 40px;">
+        <div class="analytics-header">
+            <div class="badge-live">🔴 EN VIVO</div>
+            <h1>📊 Panel de Analytics</h1>
+            <p>
+                Estadísticas en tiempo real de la página.
+                Datos guard</h1>ados automáticamente en tu navegador.
+            </p>
+        </div>
+
+        <div class="stats-grid" id="statsGrid">
+            <!-- Generado por JS -->
+        </div>
+
+        <div class="section-card">
+            <h2>🖱️ Clics por Categoría</h2>
+            <div class="click-grid" id="clickGrid"></div>
+            <div id="clickBarContainer" style="height</h2>:12px;background:rgba(167,139,250,0.05);border-radius:6px;margin-top:16px;display:flex;overflow:hidden;"></div>
+        </div>
+
+        <div class="section-card">
+            <h2>📅 Actividad - Últimos 7 Días</h2>
+            <div class="bar-ch</h2>art" id="activityChart"></div>
+            <div class="bar-legend">
+                <span><span class="legend-dot" style="background:#7c3aed;"></span> Visitas</span>
+                <span><span class="legend-dot" style="background:#ec4899;"></span> Clics</span>
+                <span><span class="legend-dot" style="background:#f59e0b;"></span> Tiempo</span>
+                <span><span class="legend-dot" style="background:#10b981;"></span> Canciones</span>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2>🎵 Canciones Reproducidas</h2>
+            <div id="songsContainer"></div>
+        </div>
+
+        <div style="text-align:center;padding:20</h2>px 0;">
+            <button class="btn-reset" onclick="resetAnalytics()">🗑️ Resetear todos los datos</button>
+            <p style="color:var(--text-dim);font-size:0.78rem;margin-top:8px;">Esto borrará todas las estadísticas guardadas en este navegador</p>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="wiki-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <h3>TINI <span>Wiki</span></h3>
+                <p>
+                    Una enciclopedia dedicada a la carrera y obra de Martina
+                    "TINI" Stoessel. Hecho con ❤️ por Tinistas de todo el
+                    mundo.
+                </p>
+            </div>
+</span>            <div class="footer-col">
+                <h4>Contenido</h4>
+                <ul>
+                    <li><a href="biografia.html">Biografía</a></li>
+                    <li><a href</h4>="discografia.html">Discografía</a></li>
+                    <li><a href="canciones.html">Canciones</a></li>
+                    <li><a href="colaboraciones.html">Colaboraciones</a></li>
+                    <li><a href="datos.html">Datos Curiosos</a></li>
+                    <li><a href="analytics.html">📊 Analytics</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Enlaces</h4>
+                <ul>
+                    <li><a href="https://www.instagram.com</h4>/tinistoessel/" target="_blank">Instagram</a></li>
+                    <li><a href="https://open.spotify.com/intl-es/artist/7vXDAI8JwjW531ouMGbf4" target="_blank">Spotify</a></li>
+                    <li><a href="https://www.youtube.com/@TINIOficial" target="_blank">YouTube</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Más</h4>
+                <ul>
+                    <li><a href="https://es.wikipedia.org/wiki/Martina_Stoessel" target="_blank">Wikipedia</a></li>
+                    <li><a href="https://www.tinisto</h4>essel.com/" target="_blank">Sitio Oficial</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 TINI Wiki — Contenido bajo licencia CC-BY-SA</p>
+            <p>⚡ Hecho con pasión por los fans</p>
+        </div>
+   </p> </footer>
+
+    <!-- ===== ANALYTICS SCRIPT (floating</p> widget) ===== -->
+    <script src="analytics.js"></script>
+
+    <!-- ===== DASHBOARD SCRIPT ===== -->
+    <script>
+        const KEY = 'tini_analytics';
+
+        function loadData() {
+            try {
+                const raw = localStorage.getItem(KEY);
+                return raw ? JSON.parse(raw) : null;
+            } catch(e) { return null; }
+        }
+
+        function formatTime(seconds) {
+            seconds = seconds || 0;
+            const h = Math.floor(seconds / 3600);
+            const m = Math.floor((seconds % 3600) / 60);
+            const s = seconds % 60;
+            if (h > 0) return `${h}h ${m}m ${s}s`;
+            if (m > 0) return `${m}m ${s}s`;
+            return `${s}s`;
+        }
+
+        function getDayName(dateStr) {
+            const d = new Date(dateStr + 'T12:00:00');
+            const dias = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+            return dias[d.getDay()];
+        }
+
+        function render() {
+            const data = loadData();
+            if (!data) {
+                document.querySelector('.wiki-content').innerHTML = `
+                    <div style="text-align:center;padding:100px 20px;">
+                        <span style="font-size:4rem;">📭</span>
+                        <h2 style="margin:20px 0;color:#8b7aaa;">No hay datos todavía</h2>
+                        <p style="color:#6b5e85;">Los datos aparecerán aquí cuando los visitantes interactúen con la página.</p>
+                        <p style="color:#6b5e85;font-size:0.85rem;margin-top:8px;">Ya tienes el script <code>analytics.js</code> instalado correctamente.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Stats grid
+            const totalVisits = data.total_visits || 0;
+            const uniqueVisits = data.unique_visits || 0;
+            const totalClicks = data.click_stats?.total || 0;
+            const totalTime = data.time_stats?.total_seconds || 0;
+            const totalSongs = data.songs_played?.total || 0;
+            const sessions = data.time_stats?.sessions?.length || 0;
+
+            document.getElementById('statsGrid').innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-icon">👁️</div>
+                    <div class="stat-value">${totalVisits}</div>
+                    <div class="stat-label">Visitas Totales</div>
+                    <div class="stat-sub">${uniqueVisits} visitantes únicos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🖱️</div>
+                    <div class="stat-value">${totalClicks}</div>
+                    <div class="stat-label">Clics Totales</div>
+                    <div class="stat-sub">${sessions} sesiones registradas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-value">${formatTime(totalTime)}</div>
+                    <div class="stat-label">Tiempo Total</div>
+                    <div class="stat-sub">Promedio: ${sessions > 0 ? formatTime(Math.round(totalTime / sessions)) : '0s'} por sesión</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎵</div>
+                    <div class="stat-value">${totalSongs}</div>
+                    <div class="stat-label">Canciones Reproducidas</div>
+                    <div class="stat-sub">${Object.keys(data.songs_played?.songs || {}).length} canciones distintas</div>
+                </div>
+            `;
+
+            // Click categories
+            const cats = data.click_stats?.categories || {};
+            const catTotal = Object.values(cats).reduce((a, b) => a + b, 0) || 1;
+            const catIcons = { links: '🔗', buttons: '🔘', images: '🖼️', audio: '🎵', other: '📌' };
+            const catLabels = { links: 'Enlaces', buttons: 'Botones', images: 'Imágenes', audio: 'Audio', other: 'Otros' };
+
+            document.getElementById('clickGrid').innerHTML = Object.entries(cats).map(([key, val]) => `
+                <div class="click-cat">
+                    <div class="cat-icon">${catIcons[key] || '📌'}</div>
+                    <span class="cat-value">${val}</span>
+                    <span class="cat-label">${catLabels[key] || key}</span>
+                </div>
+            `).join('');
+
+            const clickBar = document.getElementById('clickBarContainer');
+            const colors = { links: '#7c3aed', buttons: '#ec4899', images: '#f59e0b', audio: '#10b981', other: '#6b7280' };
+            clickBar.innerHTML = Object.entries(cats).map(([key, val]) => {
+                const pct = (val / catTotal) * 100;
+                return `<div style="height:100%;width:${pct}%;background:${colors[key]};transition:width 0.5s ease;" title="${catLabels[key]}: ${val} (${Math.round(pct)}%)"></div>`;
+            }).join('');
+
+            // Activity chart (last 7 days)
+            const daily = data.daily_activity || {};
+            const today = new Date();
+            const days = [];
+            for (let i = 6; i >= 0; i--) {
+                const d = new Date(today);
+                d.setDate(d.getDate() - i);
+                const key = d.toISOString().split('T')[0];
+                days.push({ key, data: daily[key] || {} });
+            }
+
+            const maxV = Math.max(...days.map(d => d.data.visits || 0), 1);
+            const maxC = Math.max(...days.map(d => d.data.clicks || 0), 1);
+            const maxT = Math.max(...days.map(d => d.data.time_seconds || 0), 1);
+            const maxS = Math.max(...days.map(d => d.data.songs || 0), 1);
+
+            document.getElementById('activityChart').innerHTML = days.map(d => {
+                const v = ((d.data.visits || 0) / maxV) * 100;
+                const c = ((d.data.clicks || 0) / maxC) * 100;
+                const t = ((d.data.time_seconds || 0) / maxT) * 100;
+                const s = ((d.data.songs || 0) / maxS) * 100;
+                return `
+                    <div class="bar-group">
+                        <div class="bar-stack">
+                            <div class="bar visits" style="height:${Math.max(v,2)}%" title="Visitas: ${d.data.visits || 0}"></div>
+                            <div class="bar clicks" style="height:${Math.max(c,2)}%" title="Clics: ${d.data.clicks || 0}"></div>
+                            <div class="bar time" style="height:${Math.max(t,2)}%" title="Tiempo: ${formatTime(d.data.time_seconds || 0)}"></div>
+                            <div class="bar songs" style="height:${Math.max(s,2)}%" title="Canciones: ${d.data.songs || 0}"></div>
+                        </div>
+                        <span class="bar-label">${getDayName(d.key)}</span>
+                    </div>
+                `;
+            }).join('');
+
+            // Songs list
+            const songs = data.songs_played?.songs || {};
+            const songEntries = Object.entries(songs).sort((a, b) => b[1] - a[1]);
+            const sc = document.getElementById('songsContainer');
+
+            if (songEntries.length === 0) {
+                sc.innerHTML = '<div class="empty-state"><span>🎵</span><p>Aún no se han reproducido canciones</p></div>';
+            } else {
+                const maxSC = Math.max(...songEntries.map(([,v]) => v), 1);
+                sc.innerHTML = songEntries.map(([name, count]) => `
+                    <div class="song-row">
+                        <span class="song-name">🎵 ${name}</span>
+                        <span class="song-count">${count} ${count === 1 ? 'vez' : 'veces'}</span>
+                    </div>
+                    <div class="song-progress"><div class="song-progress-fill" style="width:${(count / maxSC) * 100}%"></div></div>
+                `).join('');
+            }
+        }
+
+        function resetAnalytics() {
+            if (confirm('⚠️ ¿Borrar TODOS los datos de analytics?')) {
+                if (confirm('¿Seguro? Esta acción no se puede deshacer.')) {
+                    localStorage.removeItem(KEY);
+                    render();
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', render);
+    </script>
+</body>
+</html>
